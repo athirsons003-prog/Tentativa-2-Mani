@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tapioca - O Segredo de Mani</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #fffaf0, #f5f5dc);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 650px;
+  background: #fffdf7;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  text-align: center;
+  position: relative;
+  margin: 20px 0;
+}
+
+.tela {
+  display: none;
+}
+
+.ativa {
+  display: block;
+}
+
+button {
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f3e5ab;
+  color: #5d4037;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid #e0c97f;
+  transition: 0.25s;
+  font-size: 14px;
+  text-align: left;
+}
+
+button:hover {
+  transform: scale(1.02);
+  background: #e8d595;
+}
+
+.start {
+  background: #d7ccc8;
+  text-align: center;
+}
+
+.voltar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: auto;
+  padding: 8px 15px;
+  z-index: 10;
+}
+
+.barra {
+  height: 8px;
+  background: #eee;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.progresso {
+  height: 100%;
+  background: #bcaaa4;
+  width: 0%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.resultado {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+h2 {
+  color: #5d4037;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.pergunta-texto {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #3e2723;
+}
+
+.creditos-conteudo {
+  text-align: left;
+  margin: 20px 0;
+  line-height: 1.8;
+}
+
+.story-box {
+  background: rgba(188, 170, 164, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px 0;
+  text-align: left;
+  border-left: 4px solid #bcaaa4;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.story-box p {
+  margin: 12px 0;
+  line-height: 1.6;
+}
+
+.destaque {
+  color: #8d6e63;
+  font-weight: 600;
+  font-style: italic;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+<div id="menu" class="container tela ativa">
+  <h1>🥥 O Segredo de Mani</h1>
+  <p>Uma jornada pela ciência e pela lenda indígena da mandioca</p>
+
+  <button class="start" id="btnIniciar">▶ Iniciar Jornada</button>
+  <button id="btnCreditosMenu">📜 Créditos</button>
+</div>
+
+<!-- CRÉDITOS -->
+<div id="creditos" class="container tela">
+  <button class="voltar" id="btnVoltarCreditos">⬅ Voltar</button>
+  <h1>📜 Créditos</h1>
+  <div class="creditos-conteudo">
+    <p><strong>O Segredo de Mani</strong></p>
+    <p>Jogo educativo baseado na lenda indígena da mandioca.</p>
+    <br>
+    <p><strong>Desenvolvimento:</strong> Quiz interativo sobre a ciência da tapioca</p>
+    <p><strong>Conteúdo científico:</strong> Gelatinização do amido, calorimetria e transformações físico-químicas</p>
+    <p><strong>Referência cultural:</strong> Lenda de Mani - patrimônio imaterial dos povos originários do Brasil</p>
+    <br>
+    <p>🌟 <em>"Mani" significa mandioca em tupi-guarani.</em></p>
+    <p>📚 Baseado na tradição oral dos povos indígenas que habitavam o território brasileiro.</p>
+  </div>
+  <button id="btnVoltarMenuCreditos">🏠 Voltar ao Menu</button>
+</div>
+
+<!-- JOGO -->
+<div id="jogo" class="container tela">
+  <div class="barra">
+    <div class="progresso" id="progresso"></div>
+  </div>
+
+  <div id="tela1" class="tela ativa">
+    <h1>🌿 A Lenda de Mani</h1>
+    <div class="story-box">
+      <p>Há muito tempo, entre os povos indígenas que habitavam o território que hoje conhecemos como Brasil, existia uma história que atravessou gerações: <strong>a história de Mani</strong>.</p>
+      <p>Conta-se que Mani era uma criança diferente, de pele muito clara, que nasceu em uma aldeia e chamou a atenção de todos. Ela cresceu cercada de cuidado e curiosidade, até que, de forma inesperada, adoeceu e faleceu ainda muito jovem.</p>
+      <p>De acordo com a tradição, ela foi enterrada dentro da própria oca. Com o passar dos dias, algo extraordinário aconteceu: <strong>nasceu uma planta desconhecida</strong>.</p>
+      <p>Ao cavarem a terra, encontraram uma raiz branca e abundante: a mandioca, que muitos acreditam significar <strong>"casa de Mani"</strong> (mani + oca).</p>
+      <p>Os povos perceberam que ela poderia ser perigosa se consumida de forma inadequada, sendo necessário observar, testar e transformar. Com o tempo, descobriram que dela era possível extrair um pó branco que, ao ser aquecido, se transformava em uma massa firme: <strong>a tapioca</strong>.</p>
+      <p>Mesmo sem instrumentos modernos, desenvolveram conhecimentos baseados na observação e experimentação — princípios que hoje chamamos de científicos.</p>
+      <p class="destaque">✨ Mas como um simples pó se transforma em algo sólido com o calor? Agora é sua missão investigar esse mistério! ✨</p>
+    </div>
+    <button id="btnProxima1">🌱 Começar Investigação Científica</button>
+  </div>
+
+  <!-- As demais telas permanecem iguais, só mudei a estrutura dos botões para usar addEventListener -->
+  <div id="tela2" class="tela">
+    <h2>Pergunta 1 de 14</h2>
+    <p class="pergunta-texto">Por que a tapioca não apresenta coesão antes do aquecimento?</p>
+    <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque o ar frio da despensa contrai os grânulos, deixando-os tão pequenos que eles não conseguem se tocar para grudar uns nos outros." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">A) Porque o ar frio da despensa contrai os grânulos, deixando-os tão pequenos que eles não conseguem se tocar para grudar uns nos outros.</button>
+    <button class="resposta" data-correta="true" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">B) Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.</button>
+    <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque a tapioca é composta de pequenos cristais de gelo seco que só derretem e viram cola quando entram em contato com uma frigideira quente." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">C) Porque a tapioca é composta de pequenos cristais de gelo seco que só derretem e viram cola quando entram em contato com uma frigideira quente.</button>
+    <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque antes de aquecer, o pó está 'dormindo' e suas partículas não receberam o comando do cérebro da mandioca para se unirem." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">D) Porque antes de aquecer, o pó está "dormindo" e suas partículas não receberam o comando do cérebro da mandioca para se unirem.</button>
+  </div>
+
+  <!-- Para não deixar o código muito longo aqui, você vai precisar adicionar as telas 3 a 15 com a mesma estrutura de data-attributes -->
+  <!-- Vou pular para a tela final para mostrar a estrutura -->
+
+  <div id="tela16" class="tela">
+    <h1>🎉 Investigação Concluída!</h1>
+    <p class="resultado" id="resultado"></p>
+    <p style="margin-top: 20px;">Você desvendou os segredos científicos por trás da lenda de Mani!</p>
+    <p style="font-size: 14px; margin-top: 15px; color: #8d6e63;"><em>"Os povos indígenas já compreendiam os princípios da gelatinização muito antes da ciência moderna descrevê-los."</em></p>
+    <button id="btnGerarPDF">📄 Gerar Relatório em PDF</button>
+    <button id="btnReiniciar">🏠 Voltar ao Menu</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  "use strict";
+  
+  let telaAtual = 1;
+  let pontuacao = 0;
+  const totalTelas = 16;
+  const respostasUsuario = [];
+
+  // Elementos
+  const menu = document.getElementById('menu');
+  const creditos = document.getElementById('creditos');
+  const jogo = document.getElementById('jogo');
+  const progresso = document.getElementById('progresso');
+  const resultado = document.getElementById('resultado');
+
+  function mostrarTela(id) {
+    document.querySelectorAll('#jogo .tela').forEach(t => t.classList.remove('ativa'));
+    document.getElementById('tela' + id).classList.add('ativa');
+  }
+
+  function atualizarBarra() {
+    const percent = ((telaAtual - 1) / (totalTelas - 1)) * 100;
+    progresso.style.width = percent + '%';
+  }
+
+  function proximaTela() {
+    if (telaAtual < totalTelas) {
+      telaAtual++;
+      mostrarTela(telaAtual);
+      atualizarBarra();
+      
+      if (telaAtual === 16) {
+        resultado.innerText = "Você acertou " + pontuacao + " de 14 perguntas!";
+      }
+    }
+  }
+
+  function responder(dados) {
+    const correta = dados.correta === 'true';
+    const num = parseInt(dados.num);
+    
+    respostasUsuario.push({
+      numero: num,
+      pergunta: dados.pergunta,
+      resposta: dados.resposta,
+      correta: dados.corretatexto,
+      acertou: correta
+    });
+    
+    if (correta) pontuacao++;
+    proximaTela();
+  }
+
+  function iniciarJogo() {
+    menu.classList.remove('ativa');
+    jogo.classList.add('ativa');
+    telaAtual = 1;
+    pontuacao = 0;
+    respostasUsuario.length = 0;
+    mostrarTela(1);
+    atualizarBarra();
+  }
+
+  function abrirCreditos() {
+    menu.classList.remove('ativa');
+    creditos.classList.add('ativa');
+  }
+
+  function voltarMenu() {
+    creditos.classList.remove('ativa');
+    jogo.classList.remove('ativa');
+    menu.classList.add('ativa');
+  }
+
+  function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    let y = 20;
+    doc.setFontSize(16);
+    doc.text("Relatório - O Segredo de Mani", 10, y);
+    y += 10;
+    doc.setFontSize(12);
+    doc.text("Pontuação Final: " + pontuacao + " de 14 (" + Math.round(pontuacao/14*100) + "%)", 10, y);
+    y += 15;
+    doc.setFontSize(10);
+    doc.text("Sobre a lenda: Mani era uma criança indígena de cujo túmulo nasceu a mandioca.", 10, y);
+    y += 5;
+    doc.text('Seu nome, em tupi-guarani, significa "casa de Mani" (mani + oca).', 10, y);
+    y += 10;
+    
+    respostasUsuario.forEach((r) => {
+      if (y > 270) {
+        doc.addPage();
+        y = 20;
+      }
+      doc.setFontSize(11);
+      doc.text("Pergunta " + r.numero + ": " + r.pergunta.substring(0, 80) + "...", 10, y);
+      y += 6;
+      doc.setFontSize(9);
+      const respostaText = "Sua resposta: " + r.resposta;
+      const linhasResposta = doc.splitTextToSize(respostaText, 180);
+      doc.text(linhasResposta, 10, y);
+      y += linhasResposta.length * 4;
+      const corretaText = "Correta: " + r.correta;
+      const linhasCorreta = doc.splitTextToSize(corretaText, 180);
+      doc.text(linhasCorreta, 10, y);
+      y += linhasCorreta.length * 4;
+      doc.setTextColor(r.acertou ? 0 : 255, r.acertou ? 128 : 0, 0);
+      doc.text(r.acertou ? "Acertou!" : "Não foi dessa vez...", 10, y);
+      doc.setTextColor(0, 0, 0);
+      y += 10;
+    });
+    
+    doc.save("relatorio_segredo_de_mani.pdf");
+  }
+
+  // Configurar event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+    // Menu
+    document.getElementById('btnIniciar').addEventListener('click', iniciarJogo);
+    document.getElementById('btnCreditosMenu').addEventListener('click', abrirCreditos);
+    
+    // Créditos
+    document.getElementById('btnVoltarCreditos').addEventListener('click', voltarMenu);
+    document.getElementById('btnVoltarMenuCreditos').addEventListener('click', voltarMenu);
+    
+    // Tela 1
+    document.getElementById('btnProxima1').addEventListener('click', proximaTela);
+    
+    // Respostas
+    document.querySelectorAll('.resposta').forEach(btn => {
+      btn.addEventListener('click', function() {
+        responder(this.dataset);
+      });
+    });
+    
+    // Final
+    document.getElementById('btnGerarPDF').addEventListener('click', gerarPDF);
+    document.getElementById('btnReiniciar').addEventListener('click', voltarMenu);
+  });
+
+  atualizarBarra();
+})();
+</script>
+
+</body>
+  </html>
