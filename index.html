@@ -170,6 +170,7 @@ h2 {
     <div class="progresso" id="progresso"></div>
   </div>
 
+  <!-- TELA 1 - Introdução -->
   <div id="tela1" class="tela ativa">
     <h1>🌿 A Lenda de Mani</h1>
     <div class="story-box">
@@ -184,7 +185,7 @@ h2 {
     <button id="btnProxima1">🌱 Começar Investigação Científica</button>
   </div>
 
-  <!-- As demais telas permanecem iguais, só mudei a estrutura dos botões para usar addEventListener -->
+  <!-- PERGUNTA 1 -->
   <div id="tela2" class="tela">
     <h2>Pergunta 1 de 14</h2>
     <p class="pergunta-texto">Por que a tapioca não apresenta coesão antes do aquecimento?</p>
@@ -194,165 +195,86 @@ h2 {
     <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque antes de aquecer, o pó está 'dormindo' e suas partículas não receberam o comando do cérebro da mandioca para se unirem." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">D) Porque antes de aquecer, o pó está "dormindo" e suas partículas não receberam o comando do cérebro da mandioca para se unirem.</button>
   </div>
 
-  <!-- Para não deixar o código muito longo aqui, você vai precisar adicionar as telas 3 a 15 com a mesma estrutura de data-attributes -->
-  <!-- Vou pular para a tela final para mostrar a estrutura -->
-
-  <div id="tela16" class="tela">
-    <h1>🎉 Investigação Concluída!</h1>
-    <p class="resultado" id="resultado"></p>
-    <p style="margin-top: 20px;">Você desvendou os segredos científicos por trás da lenda de Mani!</p>
-    <p style="font-size: 14px; margin-top: 15px; color: #8d6e63;"><em>"Os povos indígenas já compreendiam os princípios da gelatinização muito antes da ciência moderna descrevê-los."</em></p>
-    <button id="btnGerarPDF">📄 Gerar Relatório em PDF</button>
-    <button id="btnReiniciar">🏠 Voltar ao Menu</button>
+  <!-- PERGUNTA 2 -->
+  <div id="tela3" class="tela">
+    <h2>Pergunta 2 de 14</h2>
+    <p class="pergunta-texto">A tapioca é formada principalmente por:</p>
+    <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Proteínas" data-corretatexto="Amido">A) Proteínas</button>
+    <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Lipídios" data-corretatexto="Amido">B) Lipídios</button>
+    <button class="resposta" data-correta="true" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Amido" data-corretatexto="Amido">C) Amido</button>
+    <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Sais minerais" data-corretatexto="Amido">D) Sais minerais</button>
   </div>
-</div>
 
-<script>
-(function() {
-  "use strict";
-  
-  let telaAtual = 1;
-  let pontuacao = 0;
-  const totalTelas = 16;
-  const respostasUsuario = [];
+  <!-- PERGUNTA 3 -->
+  <div id="tela4" class="tela">
+    <h2>Pergunta 3 de 14</h2>
+    <p class="pergunta-texto">O amido é um tipo de:</p>
+    <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Proteína fibrosa" data-corretatexto="Carboidrato">A) Proteína fibrosa</button>
+    <button class="resposta" data-correta="true" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Carboidrato" data-corretatexto="Carboidrato">B) Carboidrato</button>
+    <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Lipídio saturado" data-corretatexto="Carboidrato">C) Lipídio saturado</button>
+    <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Vitamina hidrossolúvel" data-corretatexto="Carboidrato">D) Vitamina hidrossolúvel</button>
+  </div>
 
-  // Elementos
-  const menu = document.getElementById('menu');
-  const creditos = document.getElementById('creditos');
-  const jogo = document.getElementById('jogo');
-  const progresso = document.getElementById('progresso');
-  const resultado = document.getElementById('resultado');
+  <!-- PERGUNTA 4 -->
+  <div id="tela5" class="tela">
+    <h2>Pergunta 4 de 14</h2>
+    <p class="pergunta-texto">Qual fator principal permite a transformação da tapioca?</p>
+    <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Água" data-corretatexto="Água e calor">A) Água</button>
+    <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Calor" data-corretatexto="Água e calor">B) Calor</button>
+    <button class="resposta" data-correta="true" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Água e calor" data-corretatexto="Água e calor">C) Água e calor</button>
+    <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Pressão" data-corretatexto="Água e calor">D) Pressão</button>
+  </div>
 
-  function mostrarTela(id) {
-    document.querySelectorAll('#jogo .tela').forEach(t => t.classList.remove('ativa'));
-    document.getElementById('tela' + id).classList.add('ativa');
-  }
+  <!-- PERGUNTA 5 -->
+  <div id="tela6" class="tela">
+    <h2>Pergunta 5 de 14</h2>
+    <p class="pergunta-texto">O que acontece com as partículas ao aquecer?</p>
+    <button class="resposta" data-correta="true" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema." data-corretatexto="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.">A) Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.</button>
+    <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="As partículas se assustam com o calor e começam a correr em círculos muito rápidos, batendo umas nas outras até se cansarem e ficarem paradas no formato de um disco." data-corretatexto="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.">B) As partículas se assustam com o calor e começam a correr em círculos muito rápidos, batendo umas nas outras até se cansarem e ficarem paradas no formato de um disco.</button>
+    <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="Elas derretem como se fossem manteiga ou chocolate, formando um líquido amarelo que depois endurece por mágica." data-corretatexto="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.">C) Elas derretem como se fossem manteiga ou chocolate, formando um líquido amarelo que depois endurece por mágica.</button>
+    <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="O calor faz as partículas se dividirem ao meio infinitamente, criando partículas cada vez menores que somem no ar, deixando a frigideira vazia." data-corretatexto="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.">D) O calor faz as partículas se dividirem ao meio infinitamente, criando partículas cada vez menores que somem no ar, deixando a frigideira vazia.</button>
+  </div>
 
-  function atualizarBarra() {
-    const percent = ((telaAtual - 1) / (totalTelas - 1)) * 100;
-    progresso.style.width = percent + '%';
-  }
+  <!-- PERGUNTA 6 -->
+  <div id="tela7" class="tela">
+    <h2>Pergunta 6 de 14</h2>
+    <p class="pergunta-texto">O aumento da temperatura provoca:</p>
+    <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Diminuição do movimento" data-corretatexto="Aumento da energia cinética">A) Diminuição do movimento</button>
+    <button class="resposta" data-correta="true" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Aumento da energia cinética" data-corretatexto="Aumento da energia cinética">B) Aumento da energia cinética</button>
+    <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Solidificação" data-corretatexto="Aumento da energia cinética">C) Solidificação</button>
+    <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Evaporação total" data-corretatexto="Aumento da energia cinética">D) Evaporação total</button>
+  </div>
 
-  function proximaTela() {
-    if (telaAtual < totalTelas) {
-      telaAtual++;
-      mostrarTela(telaAtual);
-      atualizarBarra();
-      
-      if (telaAtual === 16) {
-        resultado.innerText = "Você acertou " + pontuacao + " de 14 perguntas!";
-      }
-    }
-  }
+  <!-- PERGUNTA 7 -->
+  <div id="tela8" class="tela">
+    <h2>Pergunta 7 de 14</h2>
+    <p class="pergunta-texto">O processo de transformação do amido com calor e água chama-se:</p>
+    <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido com calor e água chama-se:" data-resposta="Caramelização" data-corretatexto="Gelatinização">A) Caramelização</button>
+    <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido com calor e água chama-se:" data-resposta="Fermentação" data-corretatexto="Gelatinização">B) Fermentação</button>
+    <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido com calor e água chama-se:" data-resposta="Putrefação" data-corretatexto="Gelatinização">C) Putrefação</button>
+    <button class="resposta" data-correta="true" data-num="7" data-pergunta="O processo de transformação do amido com calor e água chama-se:" data-resposta="Gelatinização" data-corretatexto="Gelatinização">D) Gelatinização</button>
+  </div>
 
-  function responder(dados) {
-    const correta = dados.correta === 'true';
-    const num = parseInt(dados.num);
-    
-    respostasUsuario.push({
-      numero: num,
-      pergunta: dados.pergunta,
-      resposta: dados.resposta,
-      correta: dados.corretatexto,
-      acertou: correta
-    });
-    
-    if (correta) pontuacao++;
-    proximaTela();
-  }
+  <!-- PERGUNTA 8 -->
+  <div id="tela9" class="tela">
+    <h2>Pergunta 8 de 14</h2>
+    <p class="pergunta-texto">Qual o papel da água nesse processo?</p>
+    <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="A água serve apenas para lavar a sujeira do pó. Toda ela evapora no primeiro segundo e não participa de nada que acontece depois na frigideira." data-corretatexto="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.">A) A água serve apenas para lavar a sujeira do pó. Toda ela evapora no primeiro segundo e não participa de nada que acontece depois na frigideira.</button>
+    <button class="resposta" data-correta="true" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento." data-corretatexto="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.">B) Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.</button>
+    <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="A água se transforma em pequenas molas invisíveis que empurram os grãos de amido para ficarem bem juntinhos e não se soltarem mais." data-corretatexto="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.">C) A água se transforma em pequenas molas invisíveis que empurram os grãos de amido para ficarem bem juntinhos e não se soltarem mais.</button>
+    <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="A água na verdade atrapalha o processo, por isso os melhores cozinheiros fazem tapioca com o pó completamente seco para ela ficar bem durinha." data-corretatexto="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.">D) A água na verdade atrapalha o processo, por isso os melhores cozinheiros fazem tapioca com o pó completamente seco para ela ficar bem durinha.</button>
+  </div>
 
-  function iniciarJogo() {
-    menu.classList.remove('ativa');
-    jogo.classList.add('ativa');
-    telaAtual = 1;
-    pontuacao = 0;
-    respostasUsuario.length = 0;
-    mostrarTela(1);
-    atualizarBarra();
-  }
+  <!-- PERGUNTA 9 -->
+  <div id="tela10" class="tela">
+    <h2>Pergunta 9 de 14</h2>
+    <p class="pergunta-texto">Durante o aquecimento, a água:</p>
+    <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Não interfere" data-corretatexto="Ajuda na reorganização">A) Não interfere</button>
+    <button class="resposta" data-correta="true" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Ajuda na reorganização" data-corretatexto="Ajuda na reorganização">B) Ajuda na reorganização</button>
+    <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Desaparece" data-corretatexto="Ajuda na reorganização">C) Desaparece</button>
+    <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Impede reação" data-corretatexto="Ajuda na reorganização">D) Impede reação</button>
+  </div>
 
-  function abrirCreditos() {
-    menu.classList.remove('ativa');
-    creditos.classList.add('ativa');
-  }
-
-  function voltarMenu() {
-    creditos.classList.remove('ativa');
-    jogo.classList.remove('ativa');
-    menu.classList.add('ativa');
-  }
-
-  function gerarPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    
-    let y = 20;
-    doc.setFontSize(16);
-    doc.text("Relatório - O Segredo de Mani", 10, y);
-    y += 10;
-    doc.setFontSize(12);
-    doc.text("Pontuação Final: " + pontuacao + " de 14 (" + Math.round(pontuacao/14*100) + "%)", 10, y);
-    y += 15;
-    doc.setFontSize(10);
-    doc.text("Sobre a lenda: Mani era uma criança indígena de cujo túmulo nasceu a mandioca.", 10, y);
-    y += 5;
-    doc.text('Seu nome, em tupi-guarani, significa "casa de Mani" (mani + oca).', 10, y);
-    y += 10;
-    
-    respostasUsuario.forEach((r) => {
-      if (y > 270) {
-        doc.addPage();
-        y = 20;
-      }
-      doc.setFontSize(11);
-      doc.text("Pergunta " + r.numero + ": " + r.pergunta.substring(0, 80) + "...", 10, y);
-      y += 6;
-      doc.setFontSize(9);
-      const respostaText = "Sua resposta: " + r.resposta;
-      const linhasResposta = doc.splitTextToSize(respostaText, 180);
-      doc.text(linhasResposta, 10, y);
-      y += linhasResposta.length * 4;
-      const corretaText = "Correta: " + r.correta;
-      const linhasCorreta = doc.splitTextToSize(corretaText, 180);
-      doc.text(linhasCorreta, 10, y);
-      y += linhasCorreta.length * 4;
-      doc.setTextColor(r.acertou ? 0 : 255, r.acertou ? 128 : 0, 0);
-      doc.text(r.acertou ? "Acertou!" : "Não foi dessa vez...", 10, y);
-      doc.setTextColor(0, 0, 0);
-      y += 10;
-    });
-    
-    doc.save("relatorio_segredo_de_mani.pdf");
-  }
-
-  // Configurar event listeners
-  document.addEventListener('DOMContentLoaded', function() {
-    // Menu
-    document.getElementById('btnIniciar').addEventListener('click', iniciarJogo);
-    document.getElementById('btnCreditosMenu').addEventListener('click', abrirCreditos);
-    
-    // Créditos
-    document.getElementById('btnVoltarCreditos').addEventListener('click', voltarMenu);
-    document.getElementById('btnVoltarMenuCreditos').addEventListener('click', voltarMenu);
-    
-    // Tela 1
-    document.getElementById('btnProxima1').addEventListener('click', proximaTela);
-    
-    // Respostas
-    document.querySelectorAll('.resposta').forEach(btn => {
-      btn.addEventListener('click', function() {
-        responder(this.dataset);
-      });
-    });
-    
-    // Final
-    document.getElementById('btnGerarPDF').addEventListener('click', gerarPDF);
-    document.getElementById('btnReiniciar').addEventListener('click', voltarMenu);
-  });
-
-  atualizarBarra();
-})();
-</script>
-
-</body>
-  </html>
+  <!-- PERGUNTA 10 -->
+  <div id="tela11" class="tela">
+    <h2>Pergunta 10 de 14
