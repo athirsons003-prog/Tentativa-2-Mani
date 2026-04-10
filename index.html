@@ -1,280 +1,318 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tapioca - O Segredo de Mani</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tapioca - O Segredo de Mani</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #fffaf0, #f5f5dc);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fffaf0, #f5f5dc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-.container {
-  width: 90%;
-  max-width: 650px;
-  background: #fffdf7;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  text-align: center;
-  position: relative;
-  margin: 20px 0;
-}
+        .container {
+            width: 90%;
+            max-width: 650px;
+            background: #fffdf7;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            position: relative;
+            margin: 20px 0;
+        }
 
-.tela {
-  display: none;
-}
+        .tela { display: none; }
+        .ativa { display: block; }
 
-.ativa {
-  display: block;
-}
+        button {
+            width: 100%;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 12px;
+            background: #f3e5ab;
+            color: #5d4037;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid #e0c97f;
+            transition: 0.25s;
+            font-size: 14px;
+            text-align: left;
+        }
 
-button {
-  width: 100%;
-  margin: 8px 0;
-  padding: 12px;
-  border-radius: 12px;
-  background: #f3e5ab;
-  color: #5d4037;
-  font-weight: 600;
-  cursor: pointer;
-  border: 2px solid #e0c97f;
-  transition: 0.25s;
-  font-size: 14px;
-  text-align: left;
-}
-
-button:hover {
-  transform: scale(1.02);
-  background: #e8d595;
-}
-
-.start {
-  background: #d7ccc8;
-  text-align: center;
-}
-
-.voltar {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: auto;
-  padding: 8px 15px;
-  z-index: 10;
-}
-
-.barra {
-  height: 8px;
-  background: #eee;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.progresso {
-  height: 100%;
-  background: #bcaaa4;
-  width: 0%;
-  border-radius: 10px;
-  transition: width 0.3s ease;
-}
-
-.resultado {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-h2 {
-  color: #5d4037;
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-
-.pergunta-texto {
-  font-size: 16px;
-  margin-bottom: 15px;
-  color: #3e2723;
-}
-
-.creditos-conteudo {
-  text-align: left;
-  margin: 20px 0;
-  line-height: 1.8;
-}
-
-.story-box {
-  background: rgba(188, 170, 164, 0.1);
-  padding: 20px;
-  border-radius: 15px;
-  margin: 20px 0;
-  text-align: left;
-  border-left: 4px solid #bcaaa4;
-  max-height: 350px;
-  overflow-y: auto;
-}
-
-.story-box p {
-  margin: 12px 0;
-  line-height: 1.6;
-}
-
-.destaque {
-  color: #8d6e63;
-  font-weight: 600;
-  font-style: italic;
-}
-</style>
+        button:hover { transform: scale(1.02); background: #e8d595; }
+        .start { background: #d7ccc8; text-align: center; }
+        .voltar { position: absolute; top: 15px; right: 15px; width: auto; padding: 8px 15px; z-index: 10; }
+        .barra { height: 8px; background: #eee; border-radius: 10px; margin-bottom: 20px; }
+        .progresso { height: 100%; background: #bcaaa4; width: 0%; border-radius: 10px; transition: width 0.3s ease; }
+        .resultado { font-size: 22px; font-weight: bold; }
+        h2 { color: #5d4037; margin-bottom: 20px; font-size: 18px; }
+        .pergunta-texto { font-size: 16px; margin-bottom: 15px; color: #3e2723; }
+        .creditos-conteudo { text-align: left; margin: 20px 0; line-height: 1.8; }
+        .story-box { background: rgba(188, 170, 164, 0.1); padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left; border-left: 4px solid #bcaaa4; max-height: 350px; overflow-y: auto; }
+        .destaque { color: #8d6e63; font-weight: 600; font-style: italic; }
+    </style>
 </head>
-
 <body>
 
-<!-- MENU -->
 <div id="menu" class="container tela ativa">
-  <h1>🥥 O Segredo de Mani</h1>
-  <p>Uma jornada pela ciência e pela lenda indígena da mandioca</p>
-
-  <button class="start" id="btnIniciar">▶ Iniciar Jornada</button>
-  <button id="btnCreditosMenu">📜 Créditos</button>
+    <h1>🥥 O Segredo de Mani</h1>
+    <p>Uma jornada pela ciência e pela lenda indígena da mandioca</p>
+    <button class="start" id="btnIniciar">▶ Iniciar Jornada</button>
+    <button id="btnCreditosMenu">📜 Créditos</button>
 </div>
 
-<!-- CRÉDITOS -->
 <div id="creditos" class="container tela">
-  <button class="voltar" id="btnVoltarCreditos">⬅ Voltar</button>
-  <h1>📜 Créditos</h1>
-  <div class="creditos-conteudo">
-    <p><strong>O Segredo de Mani</strong></p>
-    <p>Jogo educativo baseado na lenda indígena da mandioca.</p>
-    <br>
-    <p><strong>Desenvolvimento:</strong> Quiz interativo sobre a ciência da tapioca</p>
-    <p><strong>Conteúdo científico:</strong> Gelatinização do amido, calorimetria e transformações físico-químicas</p>
-    <p><strong>Referência cultural:</strong> Lenda de Mani - patrimônio imaterial dos povos originários do Brasil</p>
-    <br>
-    <p>🌟 <em>"Mani" significa mandioca em tupi-guarani.</em></p>
-    <p>📚 Baseado na tradição oral dos povos indígenas que habitavam o território brasileiro.</p>
-  </div>
-  <button id="btnVoltarMenuCreditos">🏠 Voltar ao Menu</button>
+    <button class="voltar" id="btnVoltarCreditos">⬅ Voltar</button>
+    <h1>📜 Créditos</h1>
+    <div class="creditos-conteudo">
+        <p><strong>O Segredo de Mani</strong></p>
+        <p>Jogo educativo baseado na lenda indígena da mandioca.</p>
+        <br>
+        <p><strong>Desenvolvimento:</strong> Quiz interativo sobre a ciência da tapioca</p>
+        <p><strong>Conteúdo científico:</strong> Gelatinização do amido, calorimetria e transformações físico-químicas</p>
+        <p><strong>Referência cultural:</strong> Lenda de Mani - patrimônio imaterial dos povos originários do Brasil</p>
+    </div>
+    <button id="btnVoltarMenuCreditos" style="text-align: center;">🏠 Voltar ao Menu</button>
 </div>
 
-<!-- JOGO -->
 <div id="jogo" class="container tela">
-  <div class="barra">
-    <div class="progresso" id="progresso"></div>
-  </div>
+    <div class="barra"><div class="progresso" id="progresso"></div></div>
 
-  <!-- TELA 1 - Introdução -->
-  <div id="tela1" class="tela ativa">
-    <h1>🌿 A Lenda de Mani</h1>
-    <div class="story-box">
-      <p>Há muito tempo, entre os povos indígenas que habitavam o território que hoje conhecemos como Brasil, existia uma história que atravessou gerações: <strong>a história de Mani</strong>.</p>
-      <p>Conta-se que Mani era uma criança diferente, de pele muito clara, que nasceu em uma aldeia e chamou a atenção de todos. Ela cresceu cercada de cuidado e curiosidade, até que, de forma inesperada, adoeceu e faleceu ainda muito jovem.</p>
-      <p>De acordo com a tradição, ela foi enterrada dentro da própria oca. Com o passar dos dias, algo extraordinário aconteceu: <strong>nasceu uma planta desconhecida</strong>.</p>
-      <p>Ao cavarem a terra, encontraram uma raiz branca e abundante: a mandioca, que muitos acreditam significar <strong>"casa de Mani"</strong> (mani + oca).</p>
-      <p>Os povos perceberam que ela poderia ser perigosa se consumida de forma inadequada, sendo necessário observar, testar e transformar. Com o tempo, descobriram que dela era possível extrair um pó branco que, ao ser aquecido, se transformava em uma massa firme: <strong>a tapioca</strong>.</p>
-      <p>Mesmo sem instrumentos modernos, desenvolveram conhecimentos baseados na observação e experimentação — princípios que hoje chamamos de científicos.</p>
-      <p class="destaque">✨ Mas como um simples pó se transforma em algo sólido com o calor? Agora é sua missão investigar esse mistério! ✨</p>
+    <div id="tela1" class="tela ativa">
+        <h1>🌿 A Lenda de Mani</h1>
+        <div class="story-box">
+            <p>Há muito tempo... [A Lenda de Mani continua...]</p>
+            <p>Nasceu uma planta desconhecida no túmulo da menina Mani: a <strong>mandioca</strong>.</p>
+            <p class="destaque">✨ Como esse pó se transforma em algo sólido com o calor? Vamos investigar! ✨</p>
+        </div>
+        <button class="btn-proximo" style="text-align: center;">🌱 Começar Investigação Científica</button>
     </div>
-    <button id="btnProxima1">🌱 Começar Investigação Científica</button>
-  </div>
 
-  <!-- PERGUNTA 1 -->
-  <div id="tela2" class="tela">
-    <h2>Pergunta 1 de 14</h2>
-    <p class="pergunta-texto">Por que a tapioca não apresenta coesão antes do aquecimento?</p>
-    <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque o ar frio da despensa contrai os grânulos, deixando-os tão pequenos que eles não conseguem se tocar para grudar uns nos outros." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">A) Porque o ar frio da despensa contrai os grânulos, deixando-os tão pequenos que eles não conseguem se tocar para grudar uns nos outros.</button>
-    <button class="resposta" data-correta="true" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">B) Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.</button>
-    <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque a tapioca é composta de pequenos cristais de gelo seco que só derretem e viram cola quando entram em contato com uma frigideira quente." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">C) Porque a tapioca é composta de pequenos cristais de gelo seco que só derretem e viram cola quando entram em contato com uma frigideira quente.</button>
-    <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Porque antes de aquecer, o pó está 'dormindo' e suas partículas não receberam o comando do cérebro da mandioca para se unirem." data-corretatexto="Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização; as ligações de hidrogênio entre as cadeias poliméricas permanecem rígidas e não há formação de rede viscoelástica contínua.">D) Porque antes de aquecer, o pó está "dormindo" e suas partículas não receberam o comando do cérebro da mandioca para se unirem.</button>
-  </div>
+    <div id="tela2" class="tela">
+        <h2>Pergunta 1 de 14</h2>
+        <p class="pergunta-texto">Por que a tapioca não apresenta coesão antes do aquecimento?</p>
+        <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Ar frio contrai grânulos." data-corretatexto="Partículas hidratadas sem gelatinização.">A) Porque o ar frio da despensa contrai os grânulos...</button>
+        <button class="resposta" data-correta="true" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Partículas hidratadas sem gelatinização." data-corretatexto="Partículas hidratadas sem gelatinização.">B) Porque as partículas de amido estão hidratadas, mas ainda não sofreram gelatinização...</button>
+        <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Gelo seco." data-corretatexto="Partículas hidratadas sem gelatinização.">C) Porque a tapioca é composta de pequenos cristais de gelo seco...</button>
+        <button class="resposta" data-correta="false" data-num="1" data-pergunta="Por que a tapioca não apresenta coesão antes do aquecimento?" data-resposta="Pó dormindo." data-corretatexto="Partículas hidratadas sem gelatinização.">D) Porque antes de aquecer, o pó está "dormindo"...</button>
+    </div>
 
-  <!-- PERGUNTA 2 -->
-  <div id="tela3" class="tela">
-    <h2>Pergunta 2 de 14</h2>
-    <p class="pergunta-texto">A tapioca é formada principalmente por:</p>
-    <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Proteínas" data-corretatexto="Amido">A) Proteínas</button>
-    <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Lipídios" data-corretatexto="Amido">B) Lipídios</button>
-    <button class="resposta" data-correta="true" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Amido" data-corretatexto="Amido">C) Amido</button>
-    <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Sais minerais" data-corretatexto="Amido">D) Sais minerais</button>
-  </div>
+    <div id="tela3" class="tela">
+        <h2>Pergunta 2 de 14</h2>
+        <p class="pergunta-texto">A tapioca é formada principalmente por:</p>
+        <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Proteínas" data-corretatexto="Amido">A) Proteínas</button>
+        <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Lipídios" data-corretatexto="Amido">B) Lipídios</button>
+        <button class="resposta" data-correta="true" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Amido" data-corretatexto="Amido">C) Amido</button>
+        <button class="resposta" data-correta="false" data-num="2" data-pergunta="A tapioca é formada principalmente por:" data-resposta="Sais minerais" data-corretatexto="Amido">D) Sais minerais</button>
+    </div>
 
-  <!-- PERGUNTA 3 -->
-  <div id="tela4" class="tela">
-    <h2>Pergunta 3 de 14</h2>
-    <p class="pergunta-texto">O amido é um tipo de:</p>
-    <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Proteína fibrosa" data-corretatexto="Carboidrato">A) Proteína fibrosa</button>
-    <button class="resposta" data-correta="true" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Carboidrato" data-corretatexto="Carboidrato">B) Carboidrato</button>
-    <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Lipídio saturado" data-corretatexto="Carboidrato">C) Lipídio saturado</button>
-    <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Vitamina hidrossolúvel" data-corretatexto="Carboidrato">D) Vitamina hidrossolúvel</button>
-  </div>
+    <div id="tela4" class="tela">
+        <h2>Pergunta 3 de 14</h2>
+        <p class="pergunta-texto">O amido é um tipo de:</p>
+        <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Proteína fibrosa" data-corretatexto="Carboidrato">A) Proteína fibrosa</button>
+        <button class="resposta" data-correta="true" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Carboidrato" data-corretatexto="Carboidrato">B) Carboidrato</button>
+        <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Lipídio saturado" data-corretatexto="Carboidrato">C) Lipídio saturado</button>
+        <button class="resposta" data-correta="false" data-num="3" data-pergunta="O amido é um tipo de:" data-resposta="Vitamina hidrossolúvel" data-corretatexto="Carboidrato">D) Vitamina hidrossolúvel</button>
+    </div>
 
-  <!-- PERGUNTA 4 -->
-  <div id="tela5" class="tela">
-    <h2>Pergunta 4 de 14</h2>
-    <p class="pergunta-texto">Qual fator principal permite a transformação da tapioca?</p>
-    <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Água" data-corretatexto="Água e calor">A) Água</button>
-    <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Calor" data-corretatexto="Água e calor">B) Calor</button>
-    <button class="resposta" data-correta="true" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Água e calor" data-corretatexto="Água e calor">C) Água e calor</button>
-    <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Pressão" data-corretatexto="Água e calor">D) Pressão</button>
-  </div>
+    <div id="tela5" class="tela">
+        <h2>Pergunta 4 de 14</h2>
+        <p class="pergunta-texto">Qual fator principal permite a transformação da tapioca?</p>
+        <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Água" data-corretatexto="Água e calor">A) Água</button>
+        <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Calor" data-corretatexto="Água e calor">B) Calor</button>
+        <button class="resposta" data-correta="true" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Água e calor" data-corretatexto="Água e calor">C) Água e calor</button>
+        <button class="resposta" data-correta="false" data-num="4" data-pergunta="Qual fator principal permite a transformação da tapioca?" data-resposta="Pressão" data-corretatexto="Água e calor">D) Pressão</button>
+    </div>
 
-  <!-- PERGUNTA 5 -->
-  <div id="tela6" class="tela">
-    <h2>Pergunta 5 de 14</h2>
-    <p class="pergunta-texto">O que acontece com as partículas ao aquecer?</p>
-    <button class="resposta" data-correta="true" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema." data-corretatexto="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.">A) Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.</button>
-    <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="As partículas se assustam com o calor e começam a correr em círculos muito rápidos, batendo umas nas outras até se cansarem e ficarem paradas no formato de um disco." data-corretatexto="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.">B) As partículas se assustam com o calor e começam a correr em círculos muito rápidos, batendo umas nas outras até se cansarem e ficarem paradas no formato de um disco.</button>
-    <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="Elas derretem como se fossem manteiga ou chocolate, formando um líquido amarelo que depois endurece por mágica." data-corretatexto="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.">C) Elas derretem como se fossem manteiga ou chocolate, formando um líquido amarelo que depois endurece por mágica.</button>
-    <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="O calor faz as partículas se dividirem ao meio infinitamente, criando partículas cada vez menores que somem no ar, deixando a frigideira vazia." data-corretatexto="Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida, liberando cadeias de amilose e amilopectina que se entrelaçam e aumentam a viscosidade do sistema.">D) O calor faz as partículas se dividirem ao meio infinitamente, criando partículas cada vez menores que somem no ar, deixando a frigideira vazia.</button>
-  </div>
+    <div id="tela6" class="tela">
+        <h2>Pergunta 5 de 14</h2>
+        <p class="pergunta-texto">O que acontece com as partículas ao aquecer?</p>
+        <button class="resposta" data-correta="true" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="Grânulos incham e rompem." data-corretatexto="Grânulos absorvem água e incham até romper.">A) Os grânulos de amido absorvem água, incham progressivamente e têm sua estrutura cristalina rompida...</button>
+        <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="Correm em círculos." data-corretatexto="Grânulos absorvem água e incham até romper.">B) As partículas se assustam e correm em círculos...</button>
+        <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="Derretem como manteiga." data-corretatexto="Grânulos absorvem água e incham até romper.">C) Elas derretem como se fossem manteiga...</button>
+        <button class="resposta" data-correta="false" data-num="5" data-pergunta="O que acontece com as partículas ao aquecer?" data-resposta="Dividem-se ao meio." data-corretatexto="Grânulos absorvem água e incham até romper.">D) O calor faz as partículas se dividirem ao meio...</button>
+    </div>
 
-  <!-- PERGUNTA 6 -->
-  <div id="tela7" class="tela">
-    <h2>Pergunta 6 de 14</h2>
-    <p class="pergunta-texto">O aumento da temperatura provoca:</p>
-    <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Diminuição do movimento" data-corretatexto="Aumento da energia cinética">A) Diminuição do movimento</button>
-    <button class="resposta" data-correta="true" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Aumento da energia cinética" data-corretatexto="Aumento da energia cinética">B) Aumento da energia cinética</button>
-    <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Solidificação" data-corretatexto="Aumento da energia cinética">C) Solidificação</button>
-    <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Evaporação total" data-corretatexto="Aumento da energia cinética">D) Evaporação total</button>
-  </div>
+    <div id="tela7" class="tela">
+        <h2>Pergunta 6 de 14</h2>
+        <p class="pergunta-texto">O aumento da temperatura provoca:</p>
+        <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Diminuição do movimento" data-corretatexto="Aumento da energia cinética">A) Diminuição do movimento</button>
+        <button class="resposta" data-correta="true" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Aumento da energia cinética" data-corretatexto="Aumento da energia cinética">B) Aumento da energia cinética</button>
+        <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Solidificação" data-corretatexto="Aumento da energia cinética">C) Solidificação</button>
+        <button class="resposta" data-correta="false" data-num="6" data-pergunta="O aumento da temperatura provoca:" data-resposta="Evaporação total" data-corretatexto="Aumento da energia cinética">D) Evaporação total</button>
+    </div>
 
-  <!-- PERGUNTA 7 -->
-  <div id="tela8" class="tela">
-    <h2>Pergunta 7 de 14</h2>
-    <p class="pergunta-texto">O processo de transformação do amido com calor e água chama-se:</p>
-    <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido com calor e água chama-se:" data-resposta="Caramelização" data-corretatexto="Gelatinização">A) Caramelização</button>
-    <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido com calor e água chama-se:" data-resposta="Fermentação" data-corretatexto="Gelatinização">B) Fermentação</button>
-    <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido com calor e água chama-se:" data-resposta="Putrefação" data-corretatexto="Gelatinização">C) Putrefação</button>
-    <button class="resposta" data-correta="true" data-num="7" data-pergunta="O processo de transformação do amido com calor e água chama-se:" data-resposta="Gelatinização" data-corretatexto="Gelatinização">D) Gelatinização</button>
-  </div>
+    <div id="tela8" class="tela">
+        <h2>Pergunta 7 de 14</h2>
+        <p class="pergunta-texto">O processo de transformação do amido chama-se:</p>
+        <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido chama-se:" data-resposta="Caramelização" data-corretatexto="Gelatinização">A) Caramelização</button>
+        <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido chama-se:" data-resposta="Fermentação" data-corretatexto="Gelatinização">B) Fermentação</button>
+        <button class="resposta" data-correta="false" data-num="7" data-pergunta="O processo de transformação do amido chama-se:" data-resposta="Putrefação" data-corretatexto="Gelatinização">C) Putrefação</button>
+        <button class="resposta" data-correta="true" data-num="7" data-pergunta="O processo de transformação do amido chama-se:" data-resposta="Gelatinização" data-corretatexto="Gelatinização">D) Gelatinização</button>
+    </div>
 
-  <!-- PERGUNTA 8 -->
-  <div id="tela9" class="tela">
-    <h2>Pergunta 8 de 14</h2>
-    <p class="pergunta-texto">Qual o papel da água nesse processo?</p>
-    <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="A água serve apenas para lavar a sujeira do pó. Toda ela evapora no primeiro segundo e não participa de nada que acontece depois na frigideira." data-corretatexto="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.">A) A água serve apenas para lavar a sujeira do pó. Toda ela evapora no primeiro segundo e não participa de nada que acontece depois na frigideira.</button>
-    <button class="resposta" data-correta="true" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento." data-corretatexto="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.">B) Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.</button>
-    <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="A água se transforma em pequenas molas invisíveis que empurram os grãos de amido para ficarem bem juntinhos e não se soltarem mais." data-corretatexto="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.">C) A água se transforma em pequenas molas invisíveis que empurram os grãos de amido para ficarem bem juntinhos e não se soltarem mais.</button>
-    <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="A água na verdade atrapalha o processo, por isso os melhores cozinheiros fazem tapioca com o pó completamente seco para ela ficar bem durinha." data-corretatexto="Atuar como plastificante, facilitando a mobilidade das cadeias poliméricas do amido e participando das pontes de hidrogênio que estabilizam a nova matriz sólida após o resfriamento.">D) A água na verdade atrapalha o processo, por isso os melhores cozinheiros fazem tapioca com o pó completamente seco para ela ficar bem durinha.</button>
-  </div>
+    <div id="tela9" class="tela">
+        <h2>Pergunta 8 de 14</h2>
+        <p class="pergunta-texto">Qual o papel da água nesse processo?</p>
+        <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="Lavar a sujeira." data-corretatexto="Atuar como plastificante.">A) A água serve apenas para lavar a sujeira do pó...</button>
+        <button class="resposta" data-correta="true" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="Atuar como plastificante." data-corretatexto="Atuar como plastificante.">B) Atuar como plastificante, facilitando a mobilidade das cadeias...</button>
+        <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="Molas invisíveis." data-corretatexto="Atuar como plastificante.">C) A água se transforma em pequenas molas invisíveis...</button>
+        <button class="resposta" data-correta="false" data-num="8" data-pergunta="Qual o papel da água nesse processo?" data-resposta="Atrapalha o processo." data-corretatexto="Atuar como plastificante.">D) A água na verdade atrapalha o processo...</button>
+    </div>
 
-  <!-- PERGUNTA 9 -->
-  <div id="tela10" class="tela">
-    <h2>Pergunta 9 de 14</h2>
-    <p class="pergunta-texto">Durante o aquecimento, a água:</p>
-    <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Não interfere" data-corretatexto="Ajuda na reorganização">A) Não interfere</button>
-    <button class="resposta" data-correta="true" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Ajuda na reorganização" data-corretatexto="Ajuda na reorganização">B) Ajuda na reorganização</button>
-    <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Desaparece" data-corretatexto="Ajuda na reorganização">C) Desaparece</button>
-    <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Impede reação" data-corretatexto="Ajuda na reorganização">D) Impede reação</button>
-  </div>
+    <div id="tela10" class="tela">
+        <h2>Pergunta 9 de 14</h2>
+        <p class="pergunta-texto">Durante o aquecimento, a água:</p>
+        <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Não interfere" data-corretatexto="Ajuda na reorganização">A) Não interfere</button>
+        <button class="resposta" data-correta="true" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Ajuda na reorganização" data-corretatexto="Ajuda na reorganização">B) Ajuda na reorganização</button>
+        <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Desaparece" data-corretatexto="Ajuda na reorganização">C) Desaparece</button>
+        <button class="resposta" data-correta="false" data-num="9" data-pergunta="Durante o aquecimento, a água:" data-resposta="Impede reação" data-corretatexto="Ajuda na reorganização">D) Impede reação</button>
+    </div>
 
-  <!-- PERGUNTA 10 -->
-  <div id="tela11" class="tela">
-    <h2>Pergunta 10 de 14
+    <div id="tela11" class="tela">
+        <h2>Pergunta 10 de 14</h2>
+        <p class="pergunta-texto">Explique a gelatinização.</p>
+        <button class="resposta" data-correta="false" data-num="10" data-pergunta="Explique a gelatinização." data-resposta="Mistura com gelatina." data-corretatexto="Transição irreversível dos grânulos.">A) Gelatinização é quando a gente mistura gelatina...</button>
+        <button class="resposta" data-correta="false" data-num="10" data-pergunta="Explique a gelatinização." data-resposta="Ficar gelado." data-corretatexto="Transição irreversível dos grânulos.">B) É o nome chique para "ficar gelado"...</button>
+        <button class="resposta" data-correta="true" data-num="10" data-pergunta="Explique a gelatinização." data-resposta="Transição irreversível dos grânulos." data-corretatexto="Transição irreversível dos grânulos.">C) É o fenômeno de transição irreversível no qual os grânulos de amido intumescem...</button>
+        <button class="resposta" data-correta="false" data-num="10" data-pergunta="Explique a gelatinização." data-resposta="Petróleo vegetal." data-corretatexto="Transição irreversível dos grânulos.">D) É o momento em que vira um plástico natural...</button>
+    </div>
+
+    <div id="tela12" class="tela">
+        <h2>Pergunta 11 de 14</h2>
+        <p class="pergunta-texto">O calor provoca:</p>
+        <button class="resposta" data-correta="true" data-num="11" data-pergunta="O calor provoca:" data-resposta="Quebra de interações" data-corretatexto="Quebra de interações">A) Quebra de interações</button>
+        <button class="resposta" data-correta="false" data-num="11" data-pergunta="O calor provoca:" data-resposta="Criação de moléculas" data-corretatexto="Quebra de interações">B) Criação de moléculas</button>
+        <button class="resposta" data-correta="false" data-num="11" data-pergunta="O calor provoca:" data-resposta="Congelamento" data-corretatexto="Quebra de interações">C) Congelamento</button>
+        <button class="resposta" data-correta="false" data-num="11" data-pergunta="O calor provoca:" data-resposta="Nada" data-corretatexto="Quebra de interações">D) Nada</button>
+    </div>
+
+    <div id="tela13" class="tela">
+        <h2>Pergunta 12 de 14</h2>
+        <p class="pergunta-texto">Por que a tapioca fica firme?</p>
+        <button class="resposta" data-correta="false" data-num="12" data-pergunta="Por que a tapioca fica firme?" data-resposta="Memória de forma." data-corretatexto="Retrogradação do amido.">A) Porque a tapioca tem "memória de forma"...</button>
+        <button class="resposta" data-correta="false" data-num="12" data-pergunta="Por que a tapioca fica firme?" data-resposta="Vácuo interno." data-corretatexto="Retrogradação do amido.">B) Porque o ar sai correndo e deixa um vácuo...</button>
+        <button class="resposta" data-correta="true" data-num="12" data-pergunta="Por que a tapioca fica firme?" data-resposta="Retrogradação do amido." data-corretatexto="Retrogradação do amido.">C) Devido à reassociação das cadeias de amido (retrogradação) após o resfriamento...</button>
+        <button class="resposta" data-correta="false" data-num="12" data-pergunta="Por que a tapioca fica firme?" data-resposta="Susto do cozinheiro." data-corretatexto="Retrogradação do amido.">D) Porque o cozinheiro bateu palmas...</button>
+    </div>
+
+    <div id="tela14" class="tela">
+        <h2>Pergunta 13 de 14</h2>
+        <p class="pergunta-texto">Após esfriar, a tapioca:</p>
+        <button class="resposta" data-correta="false" data-num="13" data-pergunta="Após esfriar, a tapioca:" data-resposta="Volta a ser pó" data-corretatexto="Permanece firme">A) Volta a ser pó</button>
+        <button class="resposta" data-correta="true" data-num="13" data-pergunta="Após esfriar, a tapioca:" data-resposta="Permanece firme" data-corretatexto="Permanece firme">B) Permanece firme</button>
+        <button class="resposta" data-correta="false" data-num="13" data-pergunta="Após esfriar, a tapioca:" data-resposta="Evapora lentamente" data-corretatexto="Permanece firme">C) Evapora lentamente</button>
+        <button class="resposta" data-correta="false" data-num="13" data-pergunta="Após esfriar, a tapioca:" data-resposta="Dissolve-se em água" data-corretatexto="Permanece firme">D) Dissolve-se em água</button>
+    </div>
+
+    <div id="tela15" class="tela">
+        <h2>Pergunta 14 de 14</h2>
+        <p class="pergunta-texto">Explique o processo completo da tapioca.</p>
+        <button class="resposta" data-correta="true" data-num="14" data-pergunta="Explique o processo completo." data-resposta="Hidratação, Gelatinização e Gel." data-corretatexto="Hidratação, Gelatinização e Matriz Sólida.">A) Envolve hidratação, calor para romper cristais e resfriamento para formar matriz sólida...</button>
+        <button class="resposta" data-correta="false" data-num="14" data-pergunta="Explique o processo completo." data-resposta="Pó triste e feliz." data-corretatexto="Hidratação, Gelatinização e Matriz Sólida.">B) Primeiro o pó fica triste, depois sua com o calor...</button>
+        <button class="resposta" data-correta="false" data-num="14" data-pergunta="Explique o processo completo." data-resposta="Esponja e vento." data-corretatexto="Hidratação, Gelatinização e Matriz Sólida.">C) O pó suga água como esponja e o vento seca...</button>
+        <button class="resposta" data-correta="false" data-num="14" data-pergunta="Explique o processo completo." data-resposta="Queimado vira cola." data-corretatexto="Hidratação, Gelatinização e Matriz Sólida.">D) A parte queimada serve de cola para a parte crua...</button>
+    </div>
+
+    <div id="tela16" class="tela">
+        <h1>🎉 Investigação Concluída!</h1>
+        <p class="resultado" id="resultado"></p>
+        <p>Você desvendou os segredos científicos por trás da lenda de Mani!</p>
+        <button id="btnGerarPDF" style="text-align: center;">📄 Gerar Relatório em PDF</button>
+        <button id="btnReiniciar" style="text-align: center;">🏠 Voltar ao Menu</button>
+    </div>
+</div>
+
+<script>
+(function() {
+    "use strict";
+    let telaAtual = 1;
+    let pontuacao = 0;
+    const totalTelas = 16;
+    const respostasUsuario = [];
+
+    const menu = document.getElementById('menu');
+    const creditos = document.getElementById('creditos');
+    const jogo = document.getElementById('jogo');
+    const progresso = document.getElementById('progresso');
+    const resultado = document.getElementById('resultado');
+
+    function mostrarTela(id) {
+        document.querySelectorAll('#jogo .tela').forEach(t => t.classList.remove('ativa'));
+        const alvo = document.getElementById('tela' + id);
+        if(alvo) alvo.classList.add('ativa');
+    }
+
+    function atualizarBarra() {
+        const percent = ((telaAtual - 1) / (totalTelas - 1)) * 100;
+        progresso.style.width = percent + '%';
+    }
+
+    function responder(dados) {
+        const correta = (dados.correta === 'true');
+        respostasUsuario.push({
+            numero: dados.num,
+            pergunta: dados.pergunta,
+            resposta: dados.resposta,
+            correta: dados.corretatexto,
+            acertou: correta
+        });
+        if (correta) pontuacao++;
+        telaAtual++;
+        if (telaAtual <= totalTelas) {
+            mostrarTela(telaAtual);
+            atualizarBarra();
+            if (telaAtual === 16) {
+                resultado.innerText = `Você acertou ${pontuacao} de 14 perguntas!`;
+            }
+        }
+    }
+
+    function gerarPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        let y = 20;
+        doc.setFontSize(16);
+        doc.text("Relatorio Cientifico - O Segredo de Mani", 10, y);
+        y += 10;
+        doc.setFontSize(12);
+        doc.text(`Pontuacao: ${pontuacao} de 14 acertos.`, 10, y);
+        y += 15;
+        
+        respostasUsuario.forEach(r => {
+            if (y > 270) { doc.addPage(); y = 20; }
+            doc.setFontSize(10);
+            doc.text(`Pergunta ${r.numero}: ${r.pergunta.substring(0,60)}...`, 10, y);
+            y += 6;
+            doc.setTextColor(r.acertou ? 0 : 200, r.acertou ? 150 : 0, 0);
+            doc.text(r.acertou ? "Resultado: Correto" : "Resultado: Incorreto", 10, y);
+            doc.setTextColor(0, 0, 0);
+            y += 10;
+        });
+        doc.save("relatorio_mani.pdf");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('btnIniciar').onclick = () => { menu.classList.remove('ativa'); jogo.classList.add('ativa'); mostrarTela(1); };
+        document.getElementById('btnCreditosMenu').onclick = () => { menu.classList.remove('ativa'); creditos.classList.add('ativa'); };
+        document.getElementById('btnVoltarCreditos').onclick = () => { creditos.classList.remove('ativa'); menu.classList.add('ativa'); };
+        document.getElementById('btnVoltarMenuCreditos').onclick = () => { creditos.classList.remove('ativa'); menu.classList.add('ativa'); };
+        document.querySelector('.btn-proximo').onclick = () => { telaAtual = 2; mostrarTela(2); atualizarBarra(); };
+        document.querySelectorAll('.resposta').forEach(btn => { btn.onclick = function() { responder(this.dataset); }; });
+        document.getElementById('btnGerarPDF').onclick = gerarPDF;
+        document.getElementById('btnReiniciar').onclick = () => location.reload();
+    });
+})();
+</script>
+</body>
+</html>
